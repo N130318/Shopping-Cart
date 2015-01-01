@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="shopping">
+<head>
+    <script src="angular.min.js"></script>
+    <title></title>
+</head>
+<body ng-controller="ShoppingController">
+<div>
+    <ul>
+        <li ng-repeat="product in products">
+           {{product.id}} {{product.name}} {{product.price}}
+            <input type="button" value="Add to Cart" ng-click="addToCart(product.id)">
+        </li>
+    </ul>
+</div>
+<div id="cart">
+    <ul>
+        <li ng-repeat="cartItem in cartItems track by $index">
+            {{cartItem.id}} {{cartItem.name}} {{cartItem.price}}
+        </li>
+    </ul>
+
+
+
+</div>
+</body>
+<script src="shopping.js"></script>
+</html>
