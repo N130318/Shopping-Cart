@@ -51,6 +51,12 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
             }
         }
     }
-
-
+    $scope.updateQuantity = function(id,watchChange){
+        if(watchChange==true){
+            $scope.increaseQuantity(id);
+        }
+        else{
+            $scope.decreaseQuantity(id);
+        }
+    }
 }]);
