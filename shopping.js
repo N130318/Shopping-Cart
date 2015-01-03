@@ -30,6 +30,7 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
                 }
             }
         }
+        calculateTotal();
     }
     $scope.updateQuantity = function(id,watchChange){
         for (var j = 0; j < $scope.cartItems.length; j++) {
@@ -48,22 +49,13 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
                 }
             }
         }
+        calculateTotal();
     }
-    $scope.calculateTotal = function(){
-        //$scope.total = 0;
+    var calculateTotal = function(){
+        $scope.total = 0;
        for(var k=0;k<$scope.cartItems.length;k++){
-           $scope.tempTotal = $scope.cartItems[k].quantity * $scope.cartItems[k].price;
-           $scope.total = $scope.tempTotal + $scope.total;
+           var tempTotal = $scope.cartItems[k].quantity * $scope.cartItems[k].price;
+           $scope.total = tempTotal + $scope.total;
        }
     }
-
-
-
-
-
-
-
-
-
-
 }]);
