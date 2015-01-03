@@ -24,42 +24,33 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
                         ifProductExists = true;
                     }
                 }
-                if(ifProductExists==false){
-                    productCopy.quantity=1;
+                if (ifProductExists == false) {
+                    productCopy.quantity = 1;
                     $scope.cartItems.push(productCopy);
                 }
             }
         }
     }
-    $scope.decreaseQuantity = function(id){
-        for(var j = 0;j<$scope.cartItems.length;j++){
-        if($scope.cartItems[j].id == id){
-            $scope.cartItems[j].quantity=$scope.cartItems[j].quantity-1;
-            if($scope.cartItems[j].quantity<1){
-                $scope.cartItems.splice(j,1);
-            }
-        }
-        }
-    }
-    $scope.increaseQuantity = function(id){
-        for(var j = 0;j<$scope.cartItems.length;j++){
-            if($scope.cartItems[j].id == id){
-                $scope.cartItems[j].quantity++;
-                if($scope.cartItems[j].quantity>10){
-                    $scope.cartItems[j].quantity=10;
+    $scope.decreaseQuantity = function (id) {
+        for (var j = 0; j < $scope.cartItems.length; j++) {
+            if ($scope.cartItems[j].id == id) {
+                $scope.cartItems[j].quantity = $scope.cartItems[j].quantity - 1;
+                if ($scope.cartItems[j].quantity < 1) {
+                    $scope.cartItems.splice(j, 1);
                 }
             }
         }
     }
-
-
-
-
-
-
-
-
-
+    $scope.increaseQuantity = function (id) {
+        for (var j = 0; j < $scope.cartItems.length; j++) {
+            if ($scope.cartItems[j].id == id) {
+                $scope.cartItems[j].quantity++;
+                if ($scope.cartItems[j].quantity > 10) {
+                    $scope.cartItems[j].quantity = 10;
+                }
+            }
+        }
+    }
 
 
 }]);
