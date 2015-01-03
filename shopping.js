@@ -31,26 +31,6 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
             }
         }
     }
-    /*$scope.decreaseQuantity = function (id) {
-        for (var j = 0; j < $scope.cartItems.length; j++) {
-            if ($scope.cartItems[j].id == id) {
-                $scope.cartItems[j].quantity = $scope.cartItems[j].quantity - 1;
-                if ($scope.cartItems[j].quantity < 1) {
-                    $scope.cartItems.splice(j, 1);
-                }
-            }
-        }
-    }
-    $scope.increaseQuantity = function (id) {
-        for (var j = 0; j < $scope.cartItems.length; j++) {
-            if ($scope.cartItems[j].id == id) {
-                $scope.cartItems[j].quantity++;
-                if ($scope.cartItems[j].quantity > 10) {
-                    $scope.cartItems[j].quantity = 10;
-                }
-            }
-        }
-    }*/
     $scope.updateQuantity = function(id,watchChange){
         for (var j = 0; j < $scope.cartItems.length; j++) {
             if ($scope.cartItems[j].id == id) {
@@ -67,7 +47,23 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
                     }
                 }
             }
-
         }
     }
+    $scope.calculateTotal = function(){
+        //$scope.total = 0;
+       for(var k=0;k<$scope.cartItems.length;k++){
+           $scope.tempTotal = $scope.cartItems[k].quantity * $scope.cartItems[k].price;
+           $scope.total = $scope.tempTotal + $scope.total;
+       }
+    }
+
+
+
+
+
+
+
+
+
+
 }]);

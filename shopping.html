@@ -16,9 +16,10 @@
 <div id="cart">
     <ul>
         <li ng-repeat="cartItem in cartItems track by $index">
-            {{cartItem.id}} {{cartItem.name}} {{cartItem.price}}<input type="button" value="-" ng-click="updateQuantity(cartItem.id,false)"> {{cartItem.quantity}} <input type="button" value="+" ng-click="updateQuantity(cartItem.id,true)">
+            {{cartItem.id}} {{cartItem.name}} {{cartItem.price}}<input type="button" value="-" ng-click="updateQuantity(cartItem.id,false)"> {{cartItem.quantity}} <input type="button" value="+" ng-click="updateQuantity(cartItem.id,true)"> {{cartItem.quantity*cartItem.price}}
         </li>
     </ul>
+    <label>Total</label> {{total}}
 </div>
 </body>
 <script src="shopping.js"></script>
