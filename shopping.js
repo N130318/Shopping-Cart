@@ -17,9 +17,17 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
         for (var index = 0; index < $scope.products.length; index++) {
             if (products[index].id == id) {
                 var productCopy = angular.copy(products[index]);
-                productCopy.quantity = 1;
-                $scope.cartItems.push(productCopy);
-
+                var ifProductExists = false;
+                for (var i = 0; i < $scope.cartItems.length; i++) {
+                    if ($scope.cartItems[i].id == id) {
+                        $scope.cartItems[i].quantity++;
+                        ifProductExists = true;
+                    }
+                }
+                if(ifProductExists==false){
+                    productCopy.quantity=1;
+                    $scope.cartItems.push(productCopy);
+                }
             }
         }
     }
