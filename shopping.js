@@ -31,7 +31,7 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
             }
         }
     }
-    $scope.decreaseQuantity = function (id) {
+    /*$scope.decreaseQuantity = function (id) {
         for (var j = 0; j < $scope.cartItems.length; j++) {
             if ($scope.cartItems[j].id == id) {
                 $scope.cartItems[j].quantity = $scope.cartItems[j].quantity - 1;
@@ -50,13 +50,24 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
                 }
             }
         }
-    }
+    }*/
     $scope.updateQuantity = function(id,watchChange){
-        if(watchChange==true){
-            $scope.increaseQuantity(id);
-        }
-        else{
-            $scope.decreaseQuantity(id);
+        for (var j = 0; j < $scope.cartItems.length; j++) {
+            if ($scope.cartItems[j].id == id) {
+                if(watchChange==false){
+                    $scope.cartItems[j].quantity = $scope.cartItems[j].quantity - 1;
+                    if ($scope.cartItems[j].quantity < 1) {
+                        $scope.cartItems.splice(j, 1);
+                    }
+                }
+               else if (watchChange==true){
+                    $scope.cartItems[j].quantity++;
+                    if ($scope.cartItems[j].quantity > 10) {
+                        $scope.cartItems[j].quantity = 10;
+                    }
+                }
+            }
+
         }
     }
 }]);
