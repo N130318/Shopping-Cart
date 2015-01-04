@@ -1,22 +1,22 @@
 /**
  * Created by namita on 1/1/15.
  */
-var shampoo = {name: 'Sunsilk', id: '1', price: 599 };
-var soap = {name: 'Lux', id: '2', price: 55 };
-var coffee = {name: 'Nestle', id: '3', price: 100};
-var chips = {name: 'Uncle Chips', id: '4', price: 60};
-var chocolate = {name: 'Dairy Milk', id: '5', price: 85};
-var products = [shampoo, soap, coffee, chips, chocolate];
-
 var shoppingModule = angular.module('shopping', []);
 
-shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
-    $scope.products = angular.copy(products);
+shoppingModule.controller('ShoppingController', ["$scope", "$http", function ($scope, $http) {
+    $http.get('products.json')
+        .success(function (response) {
+            $scope.products = angular.copy(response);
+            console.log(response);
+        })
+        .error(function (error) {
+            console.log(error);
+        });
     $scope.cartItems = [];
     $scope.addToCart = function (id) {
         for (var index = 0; index < $scope.products.length; index++) {
-            if (products[index].id == id) {
-                var productCopy = angular.copy(products[index]);
+            if ($scope.products[index].id == id) {
+                var productCopy = angular.copy($scope.products[index]);
                 var ifProductExists = false;
                 for (var i = 0; i < $scope.cartItems.length; i++) {
                     if ($scope.cartItems[i].id == id) {
@@ -32,16 +32,16 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
         }
         calculateTotal();
     }
-    $scope.updateQuantity = function(id,watchChange){
+    $scope.updateQuantity = function (id, watchChange) {
         for (var j = 0; j < $scope.cartItems.length; j++) {
             if ($scope.cartItems[j].id == id) {
-                if(watchChange==false){
+                if (watchChange == false) {
                     $scope.cartItems[j].quantity = $scope.cartItems[j].quantity - 1;
                     if ($scope.cartItems[j].quantity < 1) {
                         $scope.cartItems.splice(j, 1);
                     }
                 }
-               else if (watchChange==true){
+                else if (watchChange == true) {
                     $scope.cartItems[j].quantity++;
                     if ($scope.cartItems[j].quantity > 10) {
                         $scope.cartItems[j].quantity = 10;
@@ -51,11 +51,11 @@ shoppingModule.controller('ShoppingController', ["$scope", function ($scope) {
         }
         calculateTotal();
     }
-    var calculateTotal = function(){
+    var calculateTotal = function () {
         $scope.total = 0;
-       for(var k=0;k<$scope.cartItems.length;k++){
-           var tempTotal = $scope.cartItems[k].quantity * $scope.cartItems[k].price;
-           $scope.total = tempTotal + $scope.total;
-       }
+        for (var k = 0; k < $scope.cartItems.length; k++) {
+            var tempTotal = $scope.cartItems[k].quantity * $scope.cartItems[k].price;
+            $scope.total = tempTotal + $scope.total;
+        }
     }
 }]);

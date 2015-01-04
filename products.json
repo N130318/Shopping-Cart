@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Sunsilk",
+        "id": "1",
+        "price": 599
+    },
+    {
+        "name": "Lux",
+        "id": "2",
+        "price": 55
+    },
+    {
+        "name": "Nestle",
+        "id": "3",
+        "price": 100
+    },
+    {
+        "name": "Uncle Chips",
+        "id": "4",
+        "price": 60
+    },
+    {
+        "name": "Dairy Milk",
+        "id": "5",
+        "price": 85
+    }
+]
